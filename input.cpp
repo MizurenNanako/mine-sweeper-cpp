@@ -70,28 +70,27 @@ struct input_impl
     }
 };
 
-typedef struct input_impl *m;
-
 namespace cgt
 {
+#define impl ((struct input_impl *)(_impl))
     input_t::input_t()
     {
         raw();
         intrflush(stdscr, FALSE);
         keypad(stdscr, TRUE);
         set_escdelay(10);
-        impl = new input_impl;
-        m(impl)->start_listen();
+        _impl = new input_impl;
+        impl->start_listen();
     }
 
     input_t::~input_t()
     {
-        m(impl)->stop_listen();
-        delete m(impl);
+        impl->stop_listen();
+        delete impl;
     }
 
     input_event_t input_t::get_input()
     {
-        return m(impl)->consume();
+        return impl->consume();
     }
 }

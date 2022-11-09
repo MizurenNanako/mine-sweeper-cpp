@@ -8,7 +8,7 @@ namespace cgt
     class printer_t
     {
     private:
-        void *impl;
+        void *_impl;
 
     public:
         printer_t(/* args */);

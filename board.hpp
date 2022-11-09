@@ -9,7 +9,7 @@ namespace cgt
     class board_t
     {
     private:
-        struct board_impl *impl;
+        void *_impl;
 
     public:
         board_t(size_t w_ = 1, size_t h_ = 1);

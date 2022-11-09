@@ -15,18 +15,17 @@ struct printer_impl
     }
 };
 
-typedef struct printer_impl *m;
-
 namespace cgt
 {
+#define impl ((struct printer_impl *)(_impl))
     printer_t::printer_t(/* args */)
     {
-        impl = new printer_impl;
+        _impl = new printer_impl;
     }
 
     printer_t::~printer_t()
     {
-        delete m(impl);
+        delete impl;
     }
     void printer_t::render()
     {

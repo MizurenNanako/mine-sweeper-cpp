@@ -18,7 +18,7 @@ namespace cgt
     class input_t
     {
     private:
-        void *impl;
+        void *_impl;
 
     public:
         input_t();

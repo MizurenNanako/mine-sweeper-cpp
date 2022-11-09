@@ -11,9 +11,10 @@ struct game_impl
 
 namespace cgt
 {
+#define impl ((struct game_impl *)(_impl))
     game_t::game_t()
     {
-        impl = new game_impl;
+        _impl = new game_impl;
     }
 
     game_t::~game_t()

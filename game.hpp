@@ -16,11 +16,12 @@ namespace cgt
     class game_t
     {
     private:
-        struct game_impl *impl;
+        void *_impl;
 
     public:
         game_t();
         ~game_t();
+        // @brief  Main Loop Entry
         void run();
     };
 }
