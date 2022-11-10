@@ -6,7 +6,11 @@ test: CXXFLAGS = -g
 test: test.o input.o printer.o ncurses.o game.o board.o
 	$(CXX) $(CXXFLAGS) $^ $(LDFLAGS) -o $@
 
-(*.o) : $(*.cpp) $(*.hpp) util.h
+test.cpp:
+ncurses_window.cpp: ncurses.hpp
+(*.cpp) : $(*.hpp) util.hpp
+
+(*.o) : $(*.cpp)
 	$(CXX) $(CXXFLAGS) -c $<
 
 clean_exec : 

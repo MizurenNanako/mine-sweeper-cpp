@@ -3,7 +3,7 @@
 #include <atomic>
 #include <locale>
 
-std::atomic<size_t> _ref_cnt{0};
+static std::atomic<size_t> _ref_cnt{0};
 
 namespace cgt
 {
