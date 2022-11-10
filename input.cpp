@@ -1,12 +1,13 @@
 #include "input.hpp"
-#include <ncurses.h>
 #include <queue>
 #include <thread>
 #include <mutex>
 #include <atomic>
+#include "ncurses.hpp"
 
 struct input_impl
 {
+    cgt::ncurses_t ncurse;
     std::queue<cgt::input_event_t> event_queue;
     std::thread *p_listener_thread;
     std::mutex queue_lock;
@@ -75,10 +76,6 @@ namespace cgt
 #define impl ((struct input_impl *)(_impl))
     input_t::input_t()
     {
-        raw();
-        intrflush(stdscr, FALSE);
-        keypad(stdscr, TRUE);
-        set_escdelay(10);
         _impl = new input_impl;
         impl->start_listen();
     }

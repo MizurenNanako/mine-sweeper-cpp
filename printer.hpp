@@ -11,7 +11,7 @@ namespace cgt
         void *_impl;
 
     public:
-        printer_t(/* args */);
+        printer_t();
         ~printer_t();
         void render();
         void show();

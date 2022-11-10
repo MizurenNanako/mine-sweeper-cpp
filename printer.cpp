@@ -1,24 +1,15 @@
 #include "printer.hpp"
-#include <ncurses.h>
-#include <locale>
+#include "ncurses.hpp"
 
 struct printer_impl
 {
-    printer_impl()
-    {
-        noecho();
-        clear();
-        refresh();
-    }
-    ~printer_impl()
-    {
-    }
+    cgt::ncurses_t ncurse;
 };
 
 namespace cgt
 {
 #define impl ((struct printer_impl *)(_impl))
-    printer_t::printer_t(/* args */)
+    printer_t::printer_t()
     {
         _impl = new printer_impl;
     }
