@@ -3,7 +3,7 @@ CXXFLAGS	= -O3
 LDFLAGS		= -lncurses
 
 test: CXXFLAGS = -g
-test: test.o input.o printer.o ncurses.o game.o board.o
+test: test.o input.o printer.o ncurses.o game.o board.o ncurses_window.o
 	$(CXX) $(CXXFLAGS) $^ $(LDFLAGS) -o $@
 
 test.cpp:

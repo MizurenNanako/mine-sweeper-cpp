@@ -23,14 +23,15 @@ namespace cgt
             {0, 1},
             {1, 1},
     };
-    constexpr inline pos_t operator+(pos_t lhs, pos_t rhs)
-    {
-        return pos_t{lhs.first + rhs.first, lhs.second + rhs.second};
-    }
-    constexpr inline pos_t operator-(pos_t lhs, pos_t rhs)
-    {
-        return pos_t{lhs.first - rhs.first, lhs.second - rhs.second};
-    }
+    constexpr std::array<pos_t, 4>
+        near4 = {pos_t{0, -1}, {-1, 0}, {1, 0}, {0, 1}};
 }
+
+constexpr inline cgt::pos_t operator+(cgt::pos_t lhs, cgt::pos_t rhs) { return cgt::pos_t{lhs.first + rhs.first, lhs.second + rhs.second}; }
+constexpr inline cgt::pos_t operator-(cgt::pos_t lhs, cgt::pos_t rhs) { return cgt::pos_t{lhs.first - rhs.first, lhs.second - rhs.second}; }
+constexpr inline cgt::pos_t operator+(cgt::pos_t lhs, int val) { return cgt::pos_t{lhs.first + val, lhs.second + val}; }
+constexpr inline cgt::pos_t operator-(cgt::pos_t lhs, int val) { return cgt::pos_t{lhs.first - val, lhs.second - val}; }
+constexpr inline cgt::pos_t operator*(cgt::pos_t lhs, int val) { return cgt::pos_t{lhs.first * val, lhs.second * val}; }
+constexpr inline cgt::pos_t operator/(cgt::pos_t lhs, int val) { return cgt::pos_t{lhs.first / val, lhs.second / val}; }
 
 #endif // __util_hpp
