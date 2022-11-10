@@ -14,9 +14,8 @@ namespace cgt
         printer_t();
         ~printer_t();
         void render();
-        void show();
-        void clear();
-        void puts(std::string str);
+        static void show();
+        static void clear();
     };
 }
 

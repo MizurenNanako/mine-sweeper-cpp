@@ -1,26 +1,14 @@
-#include "input.hpp"
-#include "printer.hpp"
-#include <iostream>
-#include <ncurses.h>
-
-void __attribute__((constructor)) init();
-void __attribute__((destructor)) destory();
+#include "game.hpp"
+#include "ncurses.hpp"
 
 int main()
 {
-    cgt::printer_t printer;
-    cgt::input_t input;
-    while (true)
-    {
-        cgt::input_event_t ev;
-        ev = input.get_input();
-        printer.puts(std::to_string(int(ev)));
-        printer.show();
-        if (ev == cgt::input_event_t::esc)
-            break;
-    }
+    // cgt::game_t game;
+    // game.run();
+    cgt::ncurses_t n;
+    n.draw_box('a', cgt::pos_t{1, 1}, cgt::pos_t{15, 6});
+    n.draw_hline('-', cgt::pos_t{0, 0}, 10);
+    n.refresh();
+    n.getkey();
     return 0;
 }
-
-void init() { initscr(); }
-void destory() { endwin(); }

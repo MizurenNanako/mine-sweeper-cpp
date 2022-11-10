@@ -23,6 +23,14 @@ namespace cgt
             {0, 1},
             {1, 1},
     };
+    constexpr inline pos_t operator+(pos_t lhs, pos_t rhs)
+    {
+        return pos_t{lhs.first + rhs.first, lhs.second + rhs.second};
+    }
+    constexpr inline pos_t operator-(pos_t lhs, pos_t rhs)
+    {
+        return pos_t{lhs.first - rhs.first, lhs.second - rhs.second};
+    }
 }
 
 #endif // __util_hpp

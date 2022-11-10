@@ -2,7 +2,6 @@
 #define __ncurses_hpp
 
 #include "util.hpp"
-#include <ncurses.h>
 
 namespace cgt
 {
@@ -11,6 +10,14 @@ namespace cgt
     public:
         ncurses_t();
         ~ncurses_t();
+        static void clear();
+        static void refresh();
+        static void draw_str(const char *cstr,pos_t pos);
+        static void draw_ch(const char ch, pos_t pos);
+        static void draw_hline(const char ch, pos_t pos, size_t len);
+        static void draw_vline(const char ch, pos_t pos, size_t len);
+        static void draw_box(const char ch, pos_t LT, pos_t RD);
+        static int getkey();
     };
 }
 

@@ -4,6 +4,7 @@
 #include <mutex>
 #include <atomic>
 #include "ncurses.hpp"
+#include <ncurses.h>
 
 struct input_impl
 {
@@ -34,7 +35,7 @@ struct input_impl
         {
             while (this->loop_indicater.load() == 1)
             {
-                switch (getch())
+                switch (ncurse.getkey())
                 {
                 case KEY_UP:
                     this->extend(cgt::input_event_t::up);
@@ -71,19 +72,29 @@ struct input_impl
     }
 };
 
+std::atomic<size_t> _ref_cnt{0};
+
 namespace cgt
 {
 #define impl ((struct input_impl *)(_impl))
     input_t::input_t()
     {
-        _impl = new input_impl;
-        impl->start_listen();
+        if (!_ref_cnt.load())
+        {
+            _impl = new input_impl;
+            impl->start_listen();
+        }
+        ++_ref_cnt;
     }
 
     input_t::~input_t()
     {
-        impl->stop_listen();
-        delete impl;
+        --_ref_cnt;
+        if (!_ref_cnt.load())
+        {
+            impl->stop_listen();
+            delete impl;
+        }
     }
 
     input_event_t input_t::get_input()

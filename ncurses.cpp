@@ -12,7 +12,7 @@ namespace cgt
         if (!_ref_cnt.load())
         {
             // do some init
-            std::setlocale(LC_ALL,"en_US");
+            std::setlocale(LC_ALL, "en_US");
             initscr();
             noecho();
             raw();
@@ -33,5 +33,42 @@ namespace cgt
             // do some cleaning
             endwin();
         }
+    }
+
+    void ncurses_t::clear()
+    {
+        ::clear();
+    }
+    void ncurses_t::refresh()
+    {
+        ::refresh();
+    }
+    void ncurses_t::draw_str(const char *cstr, pos_t pos)
+    {
+        mvaddstr(pos.second, pos.first, cstr);
+    }
+    void draw_ch(const char ch, pos_t pos)
+    {
+        mvaddch(pos.second, pos.first, ch);
+    }
+    void ncurses_t::draw_hline(const char ch, pos_t pos, size_t len)
+    {
+        mvhline(pos.second, pos.first, ch, len);
+    }
+    void ncurses_t::draw_vline(const char ch, pos_t pos, size_t len)
+    {
+        mvvline(pos.second, pos.first, ch, len);
+    }
+    void ncurses_t::draw_box(const char ch, pos_t LT, pos_t RD)
+    {
+        pos_t B = RD - LT;
+        mvhline(LT.second, LT.first, ch, B.first);     // top
+        mvhline(RD.second, LT.first, ch, B.first + 1); // down
+        mvvline(LT.second, LT.first, ch, B.second);    // left
+        mvvline(LT.second, RD.first, ch, B.second);    // right
+    }
+    int ncurses_t::getkey()
+    {
+        return ::getch();
     }
 }
